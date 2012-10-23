@@ -8,10 +8,7 @@ Class Load {
     * Load view by doing $this->load->view('index.php')
     * @param array $fileName File Name of view e.g index.php
     */
-    function view($fileName, $data=null) {
-        if(is_array($data)) {
-            extract($data);
-        }
+    function view($fileName, $row=null) {
         require_once( ACTIVITY_PATH . 'activity-mvc-framework/html/' . $fileName);
     }
 }

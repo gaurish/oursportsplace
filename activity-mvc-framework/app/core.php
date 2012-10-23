@@ -35,5 +35,5 @@ require_once( ACTIVITY_PATH . 'activity-mvc-framework/app/controller.php');
 */
 $activity_controller = new Controller();
 
-//select page & display it
+//select page & display item
 $activity_controller->router();
