@@ -77,4 +77,16 @@ class Model {
 		}
 		return $result;	
 	}
+
+	function roster_team_foster($subteam_id){
+		$result = array();
+		$subteam_id = mysql_real_escape_string($subteam_id);
+		$sql = sprintf("SELECT position, roster_name, car_roster from yami_roster_car where subteam_id = %d", $subteam_id);
+		if($rs = mysql_query($sql)){
+			while ($row = mysql_fetch_assoc($rs)) {
+				$result[] = $row;
+			}
+		}
+		return $result;	
+	}
 }

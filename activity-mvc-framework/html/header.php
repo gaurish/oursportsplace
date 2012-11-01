@@ -58,8 +58,13 @@ jQuery(function($) {
     	var i = $('#team_league_position tr').size() + 1;
     	$('#team_league_position').append('<tr><td><input type="text" name="team_league_position[' + i + '][date]"></td><td><input type="text" name="team_league_position[' + i + '][position]"></td></tr>');
     });
+    $('#team_roster_add_row').click(function(){
+    	var i = $('#team_roster tr').size() + 1;
+    	$('#team_roster').append('<tr><td><input type="text" name="team_roster[' + i + '][position]" class="required" title="Event/Team Position" ></td><td><input type="text" name="team_roster[' + i + '][roster_name]" class="required" title="Competitor/Player Name" ></td><td><input type="text" name="team_roster[' + i + '][car_roster]" class="required" title="Rostered Transport Driver"></td></tr>');
+    });
     $("#formmed").validate();
     $('#team_meeting_pt_entry_form').submit(ajaxSubmit);
     $('#team_league_position_entry_form').submit(ajaxSubmit);
+    $('#team_roster_entry_form').submit(ajaxSubmit);
 });
 </script>
