@@ -66,19 +66,15 @@ class Model {
 		return $result;
 	}
 
-	function team_meeting_pt_form_save($subteam_id){
-		$message = array();
-		$data = array();
-		foreach ($_POST['data'] as $value) {
-			$data[] = $value;
-		 }
-
-		// $sql = "UPDATE yami_sub_team set  meeting_point_json = $var where id = $subteam_id";
-		// if(	mysql_query($sql)) {
-		// 	$message['subteam']['message'] = "Done! Team: $team_name has been added";
-		// } else{
-		// 	$message['subteam']['message'] = "Team with that already exists or something else is wrong";
-		// }	
-		// return $message;		
+	function roster_team_league_position($subteam_id){
+		$result = array();
+		$subteam_id = mysql_real_escape_string($subteam_id);
+		$sql = sprintf("SELECT date, position from yami_roster_league where subteam_id = %d", $subteam_id);
+		if($rs = mysql_query($sql)){
+			while ($row = mysql_fetch_assoc($rs)) {
+				$result[] = $row;
+			}
+		}
+		return $result;	
 	}
 }

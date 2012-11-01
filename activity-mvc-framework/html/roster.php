@@ -10,7 +10,7 @@
 	}?>
 
 <br /><br /><br /><br />
-<form action="" method="POST">
+<form action="" method="POST" id="team_league_position_entry_form">
 <table id="team">
 <thead>
 <tr>
@@ -40,7 +40,10 @@
 </tbody>
 </table>
 <button type="button" id="team_league_position_add_row">Add new row</button>
-	<input type="submit" id="team_league_position_submit" name="ros-save" value="Save Changes" />
+<input type="submit" id="team_league_position_submit" name="ros-save" value="Save Changes" />
+<input type="hidden" name="page" value="team_league-position_form_save" />
+<input type="hidden" name="action" value="activitysubmitTeamLeaguePosition" />
+<input type="hidden" name="subteam_id" value="<?php echo $_GET['subteam_id']; ?>" />
 </form>
 </form>
 </div>

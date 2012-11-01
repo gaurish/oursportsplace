@@ -60,5 +60,6 @@ jQuery(function($) {
     });
     $("#formmed").validate();
     $('#team_meeting_pt_entry_form').submit(ajaxSubmit);
+    $('#team_league_position_entry_form').submit(ajaxSubmit);
 });
 </script>

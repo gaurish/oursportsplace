@@ -108,10 +108,12 @@ class Controller {
       if($this->can_edit){
         $data = array();        
         $data['team_meeting_pt'] = $this->model->roster_team_meeting_pt($this->subteam_id);
+        $data['team_league_position'] = $this->model->roster_team_league_position($this->subteam_id);
         $this->display('roster.php', $data);
       } else{
         $data = array();        
         $data['team_meeting_pt'] = $this->model->roster_team_meeting_pt($this->subteam_id);
+        $data['team_league_position'] = $this->model->roster_team_league_position($this->subteam_id);
         $this->display('roster_page_not_logged_in.php', $data);
       }
    }
