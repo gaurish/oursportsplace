@@ -1,9 +1,5 @@
-<form action="" method="POST" class="form1">
-<i>The list below shows teams from within the club for which further information, including rostering is available.. Click on the team name to access that information..
-If you play for a team within this club which is not listed please contact the club administrators to add it.</i>
+<form method="POST" class="form1">
 <table>
-
-
 <tr>
 <th colspan=3>Add New Team</th>
 </tr>

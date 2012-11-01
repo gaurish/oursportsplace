@@ -1,7 +1,7 @@
 <?php
 
 class Controller {
-    public $load, $model, $current_page, $bp_group_id, $is_form_submission, $can_edit;
+    public $load, $model, $current_page, $bp_group_id, $is_form_submission, $can_edit, $subteam_id;
     
     function __construct(){
         $this->load = new Load();
@@ -12,6 +12,8 @@ class Controller {
         if(isset($_GET['page'])){
             $this->current_page = $_GET['page'];
         }
+
+
         //check if its a form submission
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
         //seems like a form submission via HTTP POST method, lets handle it diffently
@@ -23,7 +25,6 @@ class Controller {
         if(bp_group_is_mod() or bp_group_is_admin()){
           $this->can_edit = true;
         }
-
         //load the header with css & js scripts
         $this->display('header.php');
     }
@@ -41,6 +42,12 @@ class Controller {
               $this->contact_form();
         } elseif ($this->current_page == 'add_team') {
               $this->add_team();
+        } elseif ($this->current_page == 'roster' &&  isset($_GET['subteam_id']) && is_numeric($_GET['subteam_id'])) {
+              $this->subteam_id = $_GET['subteam_id'];
+              $this->roster_page(); 
+        } elseif ($this->current_page == 'team_meeting_pt_form_save'){
+              $this->subteam_id = $_GET['subteam_id'];
+              $this->team_meeting_pt_form_save();
         }
         else {
             $this->home_page();
@@ -55,7 +62,7 @@ class Controller {
         }else{
           $data['subteam']['message'] = "not logged in OR invalid request";
         }
-        $this->display('fixture_info.php', $data);
+        $this->display('confirmation.php', $data);
     }
 
     function contact_page(){
@@ -69,13 +76,8 @@ class Controller {
       $this->display('contact_form.php', $data);
    }
 
-   function gallery_page(){
-        //this is a normal request, so lets just render the html/gallery.php page
-        $this->display('gallery.php');
-   }
-
-   function gallery_form(){
-     # code...
+   function display($page, $data=null){
+        $this->load->view($page, $data);
    }
 
    function fixture_info_page(){
@@ -88,12 +90,36 @@ class Controller {
      # code
    }
 
+   function gallery_page(){
+        //this is a normal request, so lets just render the html/gallery.php page
+        $this->display('gallery.php');
+   }
+
+   function gallery_form(){
+     # code...
+   }
+
    function home_page(){
         $this->display('home.php');
 
    }
 
-   function display($page, $data=null){
-        $this->load->view($page, $data);
+   function roster_page(){
+      if($this->can_edit){
+        $data = array();        
+        $data['team_meeting_pt'] = $this->model->roster_team_meeting_pt($this->subteam_id);
+        $this->display('roster.php', $data);
+      } else{
+        $data = array();        
+        $data['team_meeting_pt'] = $this->model->roster_team_meeting_pt($this->subteam_id);
+        $this->display('roster_page_not_logged_in.php', $data);
+      }
+   }
+
+   function team_meeting_pt_form_save(){
+      if($this->can_edit){
+        $data = $this->model->team_meeting_pt_form_save($this->subteam_id);        
+        $this->display('confirmation.php', $data);               
+    }
    }
 }

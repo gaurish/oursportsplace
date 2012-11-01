@@ -6,7 +6,8 @@
 * 0 = errors are not displayed(Production value)
 * 1 = display errors
 */
-error_reporting(E_ALL);
+error_reporting(E_ERROR | E_WARNING | E_PARSE);
+ // error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 1);
 define( 'ACTIVITY_PATH', dirname(__FILE__) . '/' );
 
